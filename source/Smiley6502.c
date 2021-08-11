@@ -1,7 +1,8 @@
-#include "Smiley6502.h"
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include "Smiley6502.h"
+#include "lookup.h"
 
 struct Smiley6502 *createCpu()
 {
@@ -71,6 +72,18 @@ void cpuReset(Smiley6502 *cpu)
     cpu->cycles = 8;
 }
 
+uint8_t cpuGetFlag(Smiley6502 *cpu, enum FLAGS6502 f)
+{
+    return ((cpu->status & f) > 0) ? 1 : 0;
+}
+void cpuSetFlag(Smiley6502 *cpu, enum FLAGS6502 f, bool v)
+{
+    if (v)
+        cpu->status |= f;
+    else
+        cpu->status &= ~f;
+}
+
 void cpuIrq(Smiley6502 *cpu)
 {
     if (cpuGetFlag(cpu, I) == 0)
@@ -118,18 +131,6 @@ void cpuNmi(Smiley6502 *cpu)
     cpu->pc = (hi << 8) | lo;
 
     cpu->cycles = 8;
-}
-
-uint8_t cpuGetFrag(Smiley6502 *cpu, enum FLAGS6502 f)
-{
-    return ((cpu->status & f) > 0) ? 1 : 0;
-}
-void cpuSetFlag(Smiley6502 *cpu, enum FLAGS6502 f, bool v)
-{
-    if (v)
-        cpu->status |= f;
-    else
-        cpu->status &= ~f;
 }
 
 // Modos de endereço
@@ -808,4 +809,9 @@ uint8_t cpuTYA(Smiley6502 *cpu)
 uint8_t cpuXXX(Smiley6502 *cpu)
 {
     return 0;
+}
+
+bool cpuComplete(Smiley6502 *cpu)
+{
+    return cpu->cycles == 0;
 }

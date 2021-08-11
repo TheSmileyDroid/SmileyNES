@@ -2,16 +2,28 @@
 #include "Bus.h"
 #include "Smiley6502.h"
 
+#define SFML_STATIC
+
+#include <SFML/Graphics.h>
+#include <SFML/Window.h>
+
 int main()
 {
-    Bus *bus = createBus();
-    printf("0x%02x\n", bus->ram[0]);
-    bus->ram[0] = 2;
-    printf("0x%02x\n", bus->ram[0]);
-    cpuWrite(bus->cpu, 0, 0x0F);
-    printf("Endereco: \n");
-    printf("0x%04x\n", 0);
-    printf("valor: 0x%02x\n", bus->ram[0]);
-    free(bus);
+    sfVideoMode mode = {640, 480};
+    sfRenderWindow *window = sfRenderWindow_create(mode, "SmileyNES", sfResize | sfClose, NULL);
+    sfRenderWindow_setVerticalSyncEnabled(window, sfTrue);
+
+    while (sfRenderWindow_isOpen(window))
+    {
+        sfEvent *event;
+        while (sfRenderWindow_pollEvent(window, event))
+        {
+            if (event->type == sfEvtClosed)
+                sfRenderWindow_close(window);
+        }
+
+        sfRenderWindow_clear(window, sfColor_fromRGB(100, 100, 255));
+        sfRenderWindow_display(window);
+    }
     return 0;
 }

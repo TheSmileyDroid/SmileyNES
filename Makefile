@@ -9,15 +9,23 @@ H_SOURCE=$(wildcard ./source/*.h)
 # Object files
 OBJ=$(subst .c,.o,$(subst source,objects,$(C_SOURCE)))
 
+LIBS=$(wildcard ./lib/gcc/*.a)
+
 # Compiler and linker
 CC=gcc
 
 # Flags for compiler
-CC_FLAGS=-c         \
-         -W         \
-         -Wall      \
-		 -g			\
-         -std=c99
+CC_FLAGS=-c         		\
+         -W         		\
+               		\
+		 -g					\
+         -std=c99			
+
+LIB=-Iinclude		\
+	-Llib			\
+	-lcsfml-graphics	\
+	-lcsfml-window 	\
+	-lcsfml-system
 
 # Command used at clean target
 RM = rm -rf
@@ -29,18 +37,18 @@ all: objects $(PROJ_NAME)
 
 $(PROJ_NAME): $(OBJ)
 	@ echo 'Building binary using GCC linker: $@'
-	$(CC) $^ -o $@.exe
+	$(CC) $^ $(LIB) -o $@.exe
 	@ echo 'Finished building binary: $@.exe'
 	@ echo ' '
 
 ./objects/%.o: ./source/%.c ./source/%.h
 	@ echo 'Building target using GCC compiler: $<'
-	$(CC) $< $(CC_FLAGS) -o $@
+	$(CC) $< $(CC_FLAGS) $(LIB) -o $@
 	@ echo ' '
 
 ./objects/main.o: ./source/main.c $(H_SOURCE)
 	@ echo 'Building target using GCC compiler: $<'
-	$(CC) $< $(CC_FLAGS) -o $@
+	$(CC) $< $(CC_FLAGS) $(LIB) -o $@
 	@ echo ' '
 
 objects:
