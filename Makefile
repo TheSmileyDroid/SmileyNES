@@ -20,11 +20,14 @@ CC_FLAGS=-c         		\
 		 -g					\
          -std=c99			
 
-LIB=-lmingw32  		\
-	-lSDL2main 		\
-	-lSDL2			\
-	-lSDL2_image	\
-	-lSDL2_ttf		
+LIB=-lmingw32  			\
+	-Iinclude			\
+	-Iinclude/SFML		\
+	-Llib/gcc			\
+	-lcsfml-graphics	\
+	-lcsfml-audio		\
+	-lcsfml-window		\
+	-lcsfml-system		\
 #	-Xlinker /subsystem:windows
 
 # Command used at clean target
