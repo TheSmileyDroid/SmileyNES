@@ -17,15 +17,15 @@ CC=gcc
 # Flags for compiler
 CC_FLAGS=-c         		\
          -W         		\
-               		\
 		 -g					\
          -std=c99			
 
-LIB=-Iinclude		\
-	-Llib			\
-	-lcsfml-graphics	\
-	-lcsfml-window 	\
-	-lcsfml-system
+LIB=-lmingw32  		\
+	-lSDL2main 		\
+	-lSDL2			\
+	-lSDL2_image	\
+	-lSDL2_ttf		
+#	-Xlinker /subsystem:windows
 
 # Command used at clean target
 RM = rm -rf

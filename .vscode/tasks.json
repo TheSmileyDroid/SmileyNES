@@ -6,7 +6,12 @@
         {
             "label": "make",
             "type": "shell",
-            "command": "make clean; make"
+            "command": "make clean; make",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

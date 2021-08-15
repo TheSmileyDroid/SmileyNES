@@ -4,14 +4,13 @@
     // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
-            "type": "lldb",
+            "type": "gdb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/Teste.exe",
-            "args": [],
-            "cwd": "${workspaceFolder}",
+            "target": "Teste.exe",
+            "cwd": "${workspaceRoot}",
+            "valuesFormatting": "parseText",
             "preLaunchTask": "make"
         }
     ]
