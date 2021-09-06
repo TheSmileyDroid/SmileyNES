@@ -1,5 +1,6 @@
-#ifndef BUS_H
-#define BUS_H
+#pragma once
+//#ifndef BUS_H
+//#define BUS_H
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -19,4 +20,4 @@ struct Bus *createBus();
 void busWrite(Bus *bus, uint16_t addr, uint8_t data);
 uint8_t busRead(Bus *bus, uint16_t addr, bool bReadOnly);
 
-#endif
+//#endif

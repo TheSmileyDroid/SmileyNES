@@ -17,17 +17,21 @@ CC=gcc
 # Flags for compiler
 CC_FLAGS=-c         		\
          -W         		\
-		 -g					\
-         -std=c99			
+		 -g						
 
-LIB=-lmingw32  			\
-	-Iinclude			\
-	-Iinclude/SFML		\
-	-Llib/gcc			\
-	-lcsfml-graphics	\
+
+ifeq ($(OS),Windows_NT)
+LIB=-lcsfml-graphics	\
 	-lcsfml-audio		\
 	-lcsfml-window		\
 	-lcsfml-system		\
+	-lmingw32  			
+else
+LIB=-lcsfml-graphics	\
+	-lcsfml-audio		\
+	-lcsfml-window		\
+	-lcsfml-system		
+endif
 #	-Xlinker /subsystem:windows
 
 # Command used at clean target
@@ -36,12 +40,12 @@ RM = rm -rf
 #
 # Compilation and linking
 #
-all: objects $(PROJ_NAME)
+all: objects bin ./bin/$(PROJ_NAME)
 
-$(PROJ_NAME): $(OBJ)
+./bin/$(PROJ_NAME): $(OBJ)
 	@ echo 'Building binary using GCC linker: $@'
-	$(CC) $^ $(LIB) -o $@.exe
-	@ echo 'Finished building binary: $@.exe'
+	$(CC) $^ $(LIB) -o $@
+	@ echo 'Finished building binary: $@'
 	@ echo ' '
 
 ./objects/%.o: ./source/%.c ./source/%.h
@@ -57,7 +61,16 @@ $(PROJ_NAME): $(OBJ)
 objects:
 	@ mkdir objects
 
+bin:
+	@ mkdir bin
+
 clean:
+ifeq ($(OS),Windows_NT)
 	@ rd /s /q objects
+	@ rd /s /q bin
+else
+	@ rm -rf objects
+	@ rm -rf bin
+endif
 
 .PHONY: all clean

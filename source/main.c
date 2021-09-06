@@ -4,7 +4,7 @@
 
 #define SFML_STATIC
 
-#include "../include/SFML/Graphics.h"
+#include <SFML/Graphics.h>
 #include <SFML/Window.h>
 
 const int SCREEN_WIDTH = 640;

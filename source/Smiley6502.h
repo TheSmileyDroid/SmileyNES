@@ -1,5 +1,6 @@
-#ifndef SMILEY6502_H
-#define SMILEY6502_H
+#pragma once
+//#ifndef SMILEY6502_H
+//#define SMILEY6502_H
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -147,4 +148,4 @@ uint8_t cpuFetch(Smiley6502 *cpu);
 uint8_t cpuGetFlag(Smiley6502 *cpu, enum FLAGS6502 f);
 void cpuSetFlag(Smiley6502 *cpu, enum FLAGS6502 f, bool v);
 
-#endif
+//#endif
