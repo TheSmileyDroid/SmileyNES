@@ -17,13 +17,12 @@ CC=gcc
 # Flags for compiler
 CC_FLAGS=-c         		\
          -W         		\
+		 -Wall				\
 		 -g					\
          -std=c99			
 
 LIB=-lmingw32  			\
 	-Iinclude			\
-	-Iinclude/SFML		\
-	-Llib/gcc			\
 	-lcsfml-graphics	\
 	-lcsfml-audio		\
 	-lcsfml-window		\

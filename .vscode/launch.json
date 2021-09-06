@@ -5,13 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "gdb",
+            "type": "lldb",
             "request": "launch",
-            "name": "Debug",
-            "target": "Teste.exe",
-            "cwd": "${workspaceRoot}",
-            "valuesFormatting": "parseText",
+            "name": "Launch",
+            "program": "${workspaceFolder}/Teste.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
             "preLaunchTask": "make"
         }
+        
+        
     ]
 }
