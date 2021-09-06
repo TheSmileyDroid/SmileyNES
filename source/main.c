@@ -139,5 +139,6 @@ int main()
         sfText_destroy(cpuTexts[i]);
     }
     sfRenderWindow_destroy(window);
+    destroyBus(nes);
     return 0;
 }

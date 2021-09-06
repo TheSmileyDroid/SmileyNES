@@ -9,8 +9,6 @@ H_SOURCE=$(wildcard ./source/*.h)
 # Object files
 OBJ=$(subst .c,.o,$(subst source,objects,$(C_SOURCE)))
 
-LIBS=$(wildcard ./lib/gcc/*.a)
-
 # Compiler and linker
 CC=gcc
 
